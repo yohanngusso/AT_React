@@ -1,0 +1,72 @@
+/* Estilos para o cabeçalho */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil */
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px; /* Espaçamento entre os links de navegação */
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--link-color);
+  font-weight: 500; /* Adiciona um peso de fonte para melhor legibilidade */
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: var(--link-hover-color);
+}
+
+.theme-toggle {
+  background-color: var(--button-background-color);
+  color: var(--button-text-color);
+  border: none;
+  padding: 10px 20px; /* Aumenta o padding para um botão maior */
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s; /* Adiciona uma transição para o hover */
+}
+
+.theme-toggle:hover {
+  background-color: var(--button-hover-background-color);
+  transform: scale(1.05); /* Adiciona um efeito de escala no hover */
+}
+
+/* Media queries para responsividade */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 15px; /* Reduz o espaçamento entre os links de navegação em telas menores */
+  }
+
+  .theme-toggle {
+    margin-top: 10px; /* Adiciona margem superior para separar o botão dos links de navegação */
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 10px;
+  }
+
+  .nav-link {
+    font-size: 14px; /* Reduz o tamanho da fonte dos links de navegação em telas menores */
+  }
+
+  .theme-toggle {
+    padding: 8px 16px; /* Reduz o padding do botão em telas menores */
+  }
+}

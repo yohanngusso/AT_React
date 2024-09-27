@@ -1,0 +1,68 @@
+/* Estilos gerais para os formulários de edição e adição de hotéis */
+.edit-hotel, .add-hotel {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit-hotel h2, .add-hotel h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.edit-hotel form, .add-hotel form {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-hotel label, .add-hotel label {
+  margin-bottom: 10px;
+}
+
+.edit-hotel input, .add-hotel input,
+.edit-hotel textarea, .add-hotel textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-hotel button, .add-hotel button {
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.edit-hotel button:hover, .add-hotel button:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: red;
+  font-size: 0.875em;
+  margin-top: 5px;
+}
+
+@media (max-width: 600px) {
+  .edit-hotel, .add-hotel {
+    padding: 10px;
+    max-width: 100%;
+  }
+
+  .edit-hotel input, .add-hotel input,
+  .edit-hotel textarea, .add-hotel textarea {
+    padding: 6px;
+  }
+
+  .edit-hotel button, .add-hotel button {
+    padding: 8px;
+  }
+}
