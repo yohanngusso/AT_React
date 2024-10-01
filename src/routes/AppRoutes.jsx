@@ -6,6 +6,7 @@ import FavoriteHotels from '../components/FavoriteHotels';
 import EditHotelForm from '../components/EditHotelForm';
 
 
+
 function AppRoutes() {
   return (
     <Routes>

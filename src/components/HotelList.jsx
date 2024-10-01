@@ -11,6 +11,20 @@ function HotelList() {
     setHotels([...defaultHotels, ...storedHotels]);
   }, []);
 
+  const handleDelete = (index) => {
+    const storedHotels = JSON.parse(localStorage.getItem('hotels')) || [];
+    if (index < defaultHotels.length) {
+      // Remover hotel dos defaultHotels
+      defaultHotels.splice(index, 1);
+    } else {
+      // Remover hotel do storedHotels
+      const storedHotelIndex = index - defaultHotels.length;
+      storedHotels.splice(storedHotelIndex, 1);
+      localStorage.setItem('hotels', JSON.stringify(storedHotels));
+    }
+    setHotels([...defaultHotels, ...storedHotels]);
+  };
+
   return (
     <div className="hotel-list">
       {hotels.map((hotel, index) => (
@@ -22,6 +36,7 @@ function HotelList() {
           <p>Preço Diária: R${hotel.price}</p>
           <Link to={`/hotel/${index}`}>Ver Detalhes</Link>
           <Link to={`/edit-hotel/${index}`} className="edit-button">Editar</Link>
+          <button onClick={() => handleDelete(index)} className="delete-button">Excluir</button>
         </div>
       ))}
     </div>
