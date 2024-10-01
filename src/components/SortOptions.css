@@ -1,10 +1,14 @@
-.search-bar {
+.sort-options {
     margin: 20px;
     text-align: center;
   }
   
-  .search-bar input {
-    width: 80%;
+  .sort-options label {
+    margin-right: 10px;
+    font-size: 16px;
+  }
+  
+  .sort-options select {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;

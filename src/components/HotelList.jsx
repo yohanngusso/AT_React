@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import './HotelList.css';
 import defaultHotels from './defaultHotels';
 import SearchBar from './SearchBar';
+import SortOptions from './SortOptions';
 
 function HotelList() {
   const [hotels, setHotels] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortOption, setSortOption] = useState('price');
 
   useEffect(() => {
     const storedHotels = JSON.parse(localStorage.getItem('hotels')) || [];
@@ -31,11 +33,21 @@ function HotelList() {
     hotel.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const sortedHotels = filteredHotels.sort((a, b) => {
+    if (sortOption === 'price') {
+      return a.price - b.price;
+    } else if (sortOption === 'rating') {
+      return b.stars - a.stars;
+    }
+    return 0;
+  });
+
   return (
-    <div className="hotel-list-search">
+    <div>
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <SortOptions sortOption={sortOption} setSortOption={setSortOption} />
       <div className="hotel-list">
-        {filteredHotels.map((hotel, index) => (
+        {sortedHotels.map((hotel, index) => (
           <div key={index} className="hotel-card">
             <img src={hotel.image} alt={hotel.name} className="hotel-image" />
             <h3>{hotel.name}</h3>
