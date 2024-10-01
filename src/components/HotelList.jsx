@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './HotelList.css';
 import defaultHotels from './defaultHotels';
@@ -21,6 +21,7 @@ function HotelList() {
           <p>{hotel.city}, {hotel.state}</p>
           <p>Preço Diária: R${hotel.price}</p>
           <Link to={`/hotel/${index}`}>Ver Detalhes</Link>
+          <Link to={`/edit-hotel/${index}`} className="edit-button">Editar</Link>
         </div>
       ))}
     </div>
