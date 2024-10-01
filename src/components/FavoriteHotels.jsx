@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './HotelsList.css'; 
+import './HotelList.css'; 
 
 function FavoriteHotels() {
   const [hotels, setHotels] = useState([]);
@@ -37,7 +37,7 @@ function FavoriteHotels() {
             <p>{'⭐'.repeat(hotel.stars)}</p>
             <p>{hotel.city}, {hotel.state}</p>
             <p>${hotel.price}/night</p>
-            <Link to={`/hotels/${index}`}>View Details</Link>
+            <Link to={`/hotels/${index}`}>Detalhes</Link>
           </div>
         ))}
       </div>

@@ -1,21 +1,18 @@
 import { Routes, Route } from 'react-router-dom';
-import HotelsList from '../components/HotelsList';
+import HotelsList from '../components/HotelList';
 import HotelDetails from '../components/Details/HotelDetails';
-import AddHotel from '../components/AddHotel';
-import EditHotel from '../components/EditHotel';
+import Forms from '../components/Forms';
 import FavoriteHotels from '../components/FavoriteHotels';
-import NotFound from '../components/NotFound';
+
 
 function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<HotelsList />} />
       <Route path="/hotels" element={<HotelsList />} />
-      <Route path="/hotel-details/:id" element={<HotelDetails />} />
-      <Route path="/add-hotel" element={<AddHotel />} />
-      <Route path="/edit-hotel/:id" element={<EditHotel />} />
+      <Route path="/hotel/:id" element={<HotelDetails />} />
+      <Route path="/add-hotel" element={<Forms />} />
       <Route path="/favorites" element={<FavoriteHotels />} />
-      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

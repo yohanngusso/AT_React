@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './Header.css'; // Importar o arquivo CSS específico
+import './Header.css';
 
 function Header() {
   const [theme, setTheme] = useState('light');
@@ -20,11 +20,11 @@ function Header() {
 
   return (
     <header className="header">
-      <h1>Reserva de Hotéis</h1>
-      <nav>
-        <Link to="/">Principal</Link>
-        <Link to="/add-hotel">Adicionar Hotel</Link>
-        <Link to="/favorites">Favoritos</Link>
+      <h1 className="logo">Reserva de Hotéis</h1>
+      <nav className="nav">
+        <Link to="/" className="nav-link">Principal</Link>
+        <Link to="/add-hotel" className="nav-link">Adicionar Hotel</Link>
+        <Link to="/favorites" className="nav-link">Favoritos</Link>
       </nav>
       <button onClick={toggleTheme} className="theme-toggle">
         {theme === 'light' ? 'Mudar para Tema Escuro' : 'Mudar para Tema Claro'}

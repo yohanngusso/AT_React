@@ -9,9 +9,14 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil */
 }
 
-.nav-links {
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.nav {
   display: flex;
-  gap: 30px; /* Espaçamento entre os links de navegação */
+  gap: 30px; /* Aumenta o espaçamento entre os links de navegação */
 }
 
 .nav-link {
@@ -29,44 +34,44 @@
   background-color: var(--button-background-color);
   color: var(--button-text-color);
   border: none;
-  padding: 10px 20px; /* Aumenta o padding para um botão maior */
-  border-radius: 4px;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s; /* Adiciona uma transição para o hover */
+  transition: background-color 0.3s;
 }
 
 .theme-toggle:hover {
   background-color: var(--button-hover-background-color);
-  transform: scale(1.05); /* Adiciona um efeito de escala no hover */
 }
 
-/* Media queries para responsividade */
-@media (max-width: 768px) {
+/* Media Queries para Responsividade */
+@media (max-width: 900px) {
+  .nav {
+    gap: 20px; /* Ajusta o espaçamento para telas menores */
+  }
+}
+
+@media (max-width: 600px) {
   .header {
-    flex-direction: column;
+    flex-direction: column; /* Alinha os itens verticalmente em telas menores */
     align-items: flex-start;
   }
 
-  .nav-links {
-    flex-direction: column;
-    gap: 15px; /* Reduz o espaçamento entre os links de navegação em telas menores */
-  }
-
-  .theme-toggle {
-    margin-top: 10px; /* Adiciona margem superior para separar o botão dos links de navegação */
-  }
-}
-
-@media (max-width: 480px) {
-  .header {
-    padding: 10px;
+  .nav {
+    flex-direction: column; /* Alinha os links verticalmente em telas menores */
+    gap: 10px; /* Ajusta o espaçamento para telas menores */
+    width: 100%; /* Ocupa toda a largura disponível */
   }
 
   .nav-link {
-    font-size: 14px; /* Reduz o tamanho da fonte dos links de navegação em telas menores */
+    width: 100%; /* Ocupa toda a largura disponível */
+    text-align: left; /* Alinha o texto à esquerda */
+    padding: 10px 0; /* Adiciona espaçamento vertical */
   }
 
   .theme-toggle {
-    padding: 8px 16px; /* Reduz o padding do botão em telas menores */
+    width: 100%; /* Ocupa toda a largura disponível */
+    text-align: center; /* Centraliza o texto */
+    margin-top: 10px; /* Adiciona margem superior */
   }
 }
