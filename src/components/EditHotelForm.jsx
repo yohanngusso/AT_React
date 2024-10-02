@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import SuccessMessage from './SuccessMessage';
 import defaultHotels from './defaultHotels';
-import './EditHotelForm.css'; // Importando o arquivo CSS
+import './EditHotelForm.css'; 
 
 function EditHotelForm() {
   const { id } = useParams();
@@ -84,7 +84,7 @@ function EditHotelForm() {
       }, 2000);
     } catch {
       setErrorMessage('Falha ao atualizar o hotel. Por favor, tente novamente.');
-      setTimeout(() => setErrorMessage(''), 3000); // Limpar a mensagem de erro após 3 segundos
+      setTimeout(() => setErrorMessage(''), 3000); // Limpa a mensagem de erro após 3 segundos
     }
   };
 
@@ -101,7 +101,7 @@ function EditHotelForm() {
   return (
     <div className="edit-hotel-form">
       {message && <SuccessMessage message={message} />}
-      {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Exibir mensagem de erro */}
+      {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Exibi mensagem de erro */}
       <h2>Editar Hotel</h2>
       <form onSubmit={(e) => { e.preventDefault(); handleUpdate(); }}>
         <div className="form-group">

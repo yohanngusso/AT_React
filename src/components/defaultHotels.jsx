@@ -1,4 +1,4 @@
-// Importando as imagens
+// Importando as imagens para não dar erro no vercel
 import hotel1Image1 from '../assets/imgs_hotel/hotel1/1.jpg';
 import hotel1Image2 from '../assets/imgs_hotel/hotel1/2.jpg';
 import hotel1Image3 from '../assets/imgs_hotel/hotel1/3.jpg';
@@ -52,7 +52,7 @@ const defaultHotels = [
     services: "Wi-Fi, Restaurante, Spa",
     stars: 4
   }
-  // Adicione os outros hotéis aqui
+  // Pode ser adicionado outros hotéis aqui
 ];
 
 export default defaultHotels;

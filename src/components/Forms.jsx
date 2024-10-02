@@ -14,7 +14,7 @@ function Forms() {
   const [additionalImages, setAdditionalImages] = useState(['']);
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState(''); // Estado para a mensagem de erro
+  const [errorMessage, setErrorMessage] = useState(''); 
 
 
 
@@ -53,7 +53,7 @@ function Forms() {
         localStorage.setItem('hotels', JSON.stringify(storedHotels));
 
         setMessage('Hotel adicionado com sucesso!');
-        setTimeout(() => setMessage(''), 3000); // Limpar a mensagem após 3 segundos
+        setTimeout(() => setMessage(''), 3000); 
 
         // Limpar o formulário
         setName('');
@@ -68,7 +68,7 @@ function Forms() {
         setErrors({});
       } catch {
         setErrorMessage('Falha ao salvar o hotel. Por favor, tente novamente.');
-        setTimeout(() => setErrorMessage(''), 3000); // Limpar a mensagem de erro após 3 segundos
+        setTimeout(() => setErrorMessage(''), 3000); 
       }
     }
   };
@@ -82,7 +82,7 @@ function Forms() {
   return (
     <div className="form-container">
       {message && <SuccessMessage message={message} />}
-      {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Exibir mensagem de erro */}
+      {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Exibi mensagem de erro */}
       <h2>Adicionar Novo Hotel</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
