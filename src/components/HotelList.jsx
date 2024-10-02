@@ -29,7 +29,9 @@ function HotelList() {
     setHotels([...defaultHotels, ...storedHotels]);
   };
 
-  const filteredHotels = hotels.filter(hotel =>
+  const hotelsWithIndex = hotels.map((hotel, index) => ({ ...hotel, originalIndex: index }));
+
+  const filteredHotels = hotelsWithIndex.filter(hotel =>
     hotel.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -43,20 +45,20 @@ function HotelList() {
   });
 
   return (
-    <div>
+    <div className="hotel-list-container">
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <SortOptions sortOption={sortOption} setSortOption={setSortOption} />
       <div className="hotel-list">
-        {sortedHotels.map((hotel, index) => (
-          <div key={index} className="hotel-card">
+        {sortedHotels.map((hotel) => (
+          <div key={hotel.originalIndex} className="hotel-card">
             <img src={hotel.image} alt={hotel.name} className="hotel-image" />
             <h3>{hotel.name}</h3>
             <p>{'⭐'.repeat(hotel.stars)}</p>
             <p>{hotel.city}, {hotel.state}</p>
             <p>Preço Diária: R${hotel.price}</p>
-            <Link to={`/hotel/${index}`}>Ver Detalhes</Link>
-            <Link to={`/edit-hotel/${index}`} className="edit-button">Editar</Link>
-            <button onClick={() => handleDelete(index)} className="delete-button">Excluir</button>
+            <Link to={`/hotel/${hotel.originalIndex}`}>Ver Detalhes</Link>
+            <Link to={`/edit-hotel/${hotel.originalIndex}`} className="edit-button">Editar</Link>
+            <button onClick={() => handleDelete(hotel.originalIndex)} className="delete-button">Excluir</button>
           </div>
         ))}
       </div>

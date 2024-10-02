@@ -1,20 +1,22 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Forms.css'; // Importe o arquivo CSS
+import SuccessMessage from './SuccessMessage';
+import './Forms.css';
 
 function Forms() {
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
-  const [stars, setStars] = useState(1);
+  const [stars, setStars] = useState(0);
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState(0);
   const [description, setDescription] = useState('');
   const [services, setServices] = useState('');
-  const [additionalImages, setAdditionalImages] = useState(['', '', '', '', '']); // Adiciona um estado para as imagens adicionais
+  const [additionalImages, setAdditionalImages] = useState(['']);
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState('');
-  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState(''); // Estado para a mensagem de erro
+
+
 
   const validateForm = () => {
     const newErrors = {};
@@ -45,13 +47,29 @@ function Forms() {
         additionalImages: additionalImages.filter(img => img !== ''), // Filtra imagens vazias
       };
 
-      // Salvar o novo hotel no localStorage
-      const storedHotels = JSON.parse(localStorage.getItem('hotels')) || [];
-      storedHotels.push(newHotel);
-      localStorage.setItem('hotels', JSON.stringify(storedHotels));
+      try {
+        const storedHotels = JSON.parse(localStorage.getItem('hotels')) || [];
+        storedHotels.push(newHotel);
+        localStorage.setItem('hotels', JSON.stringify(storedHotels));
 
-      setMessage('Hotel adicionado com sucesso!');
-      setTimeout(() => navigate('/'), 2000);
+        setMessage('Hotel adicionado com sucesso!');
+        setTimeout(() => setMessage(''), 3000); // Limpar a mensagem após 3 segundos
+
+        // Limpar o formulário
+        setName('');
+        setImage('');
+        setStars(0);
+        setCity('');
+        setState('');
+        setPrice(0);
+        setDescription('');
+        setServices('');
+        setAdditionalImages(['']);
+        setErrors({});
+      } catch {
+        setErrorMessage('Falha ao salvar o hotel. Por favor, tente novamente.');
+        setTimeout(() => setErrorMessage(''), 3000); // Limpar a mensagem de erro após 3 segundos
+      }
     }
   };
 
@@ -63,8 +81,9 @@ function Forms() {
 
   return (
     <div className="form-container">
+      {message && <SuccessMessage message={message} />}
+      {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Exibir mensagem de erro */}
       <h2>Adicionar Novo Hotel</h2>
-      {message && <p className="success-message">{message}</p>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Nome</label>
@@ -74,20 +93,20 @@ function Forms() {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          {errors.name && <p className="error-message">{errors.name}</p>}
+          {errors.name && <span className="error">{errors.name}</span>}
         </div>
         <div className="form-group">
-          <label htmlFor="image">URL da Imagem Principal</label>
+          <label htmlFor="image">URL da Imagem</label>
           <input
             type="text"
             id="image"
             value={image}
             onChange={(e) => setImage(e.target.value)}
           />
-          {errors.image && <p className="error-message">{errors.image}</p>}
+          {errors.image && <span className="error">{errors.image}</span>}
         </div>
         <div className="form-group">
-          <label htmlFor="stars">Estrelas</label>
+          <label htmlFor="stars">Classificação</label>
           <input
             type="number"
             id="stars"
@@ -96,7 +115,7 @@ function Forms() {
             min="1"
             max="5"
           />
-          {errors.stars && <p className="error-message">{errors.stars}</p>}
+          {errors.stars && <span className="error">{errors.stars}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="city">Cidade</label>
@@ -106,7 +125,7 @@ function Forms() {
             value={city}
             onChange={(e) => setCity(e.target.value)}
           />
-          {errors.city && <p className="error-message">{errors.city}</p>}
+          {errors.city && <span className="error">{errors.city}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="state">Estado</label>
@@ -116,19 +135,19 @@ function Forms() {
             value={state}
             onChange={(e) => setState(e.target.value)}
           />
-          {errors.state && <p className="error-message">{errors.state}</p>}
+          {errors.state && <span className="error">{errors.state}</span>}
         </div>
         <div className="form-group">
-          <label htmlFor="price">Preço</label>
+          <label htmlFor="price">Preço Diária</label>
           <input
             type="number"
             id="price"
             value={price}
             onChange={(e) => setPrice(parseFloat(e.target.value))}
-            min="0"
-            step="0.01" // Permite valores decimais
+            min="1"
+            step="0.01"
           />
-          {errors.price && <p className="error-message">{errors.price}</p>}
+          {errors.price && <span className="error">{errors.price}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="description">Descrição</label>
@@ -137,7 +156,7 @@ function Forms() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-          {errors.description && <p className="error-message">{errors.description}</p>}
+          {errors.description && <span className="error">{errors.description}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="services">Serviços</label>
@@ -146,11 +165,11 @@ function Forms() {
             value={services}
             onChange={(e) => setServices(e.target.value)}
           />
-          {errors.services && <p className="error-message">{errors.services}</p>}
+          {errors.services && <span className="error">{errors.services}</span>}
         </div>
         {additionalImages.map((img, index) => (
           <div key={index} className="form-group">
-            <label htmlFor={`additionalImage${index + 1}`}>URL da Imagem Adicional {index + 2}</label>
+            <label htmlFor={`additionalImage${index + 1}`}>URL da Imagem Adicional {index + 1}</label>
             <input
               type="text"
               id={`additionalImage${index + 1}`}
@@ -159,7 +178,7 @@ function Forms() {
             />
           </div>
         ))}
-        <button type="submit" className="submit-button">Adicionar Hotel</button>
+        <button type="submit" className='add-button'>Adicionar Hotel</button>
       </form>
     </div>
   );

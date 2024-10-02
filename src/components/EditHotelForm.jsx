@@ -1,72 +1,91 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import './EditHotelForm.css';
-import defaultHotels from './defaultHotels'; 
+import SuccessMessage from './SuccessMessage';
+import defaultHotels from './defaultHotels';
+import './EditHotelForm.css'; // Importando o arquivo CSS
 
 function EditHotelForm() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [hotel, setHotel] = useState(null);
   const [name, setName] = useState('');
-  const [image, setImage] = useState('');
-  const [stars, setStars] = useState(1);
+  const [stars, setStars] = useState(0);
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState(0);
+  const [image, setImage] = useState('');
+  const [additionalImages, setAdditionalImages] = useState([]);
   const [description, setDescription] = useState('');
   const [services, setServices] = useState('');
-  const [additionalImages, setAdditionalImages] = useState(['', '', '', '', '']);
   const [message, setMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); // Estado para a mensagem de erro
 
   useEffect(() => {
-    const storedHotels = JSON.parse(localStorage.getItem('hotels')) || [];
-    const allHotels = [...defaultHotels, ...storedHotels]; // Combine os defaultHotels com os storedHotels
-    const selectedHotel = allHotels[id];
-    if (selectedHotel) {
-      setHotel(selectedHotel);
-      setName(selectedHotel.name);
-      setImage(selectedHotel.image);
-      setStars(selectedHotel.stars);
-      setCity(selectedHotel.city);
-      setState(selectedHotel.state);
-      setPrice(selectedHotel.price);
-      setDescription(selectedHotel.description);
-      setServices(selectedHotel.services);
-      setAdditionalImages(selectedHotel.additionalImages || ['', '', '', '', '']);
-    }
-  }, [id]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const updatedHotel = {
-      name,
-      image,
-      stars,
-      city,
-      state,
-      price,
-      description,
-      services,
-      additionalImages: additionalImages.filter(img => img !== ''),
-    };
-
     const storedHotels = JSON.parse(localStorage.getItem('hotels')) || [];
     const hotelIndex = parseInt(id, 10);
 
     if (hotelIndex < defaultHotels.length) {
-      // Atualizar defaultHotels
-      defaultHotels[hotelIndex] = updatedHotel;
+      setHotel(defaultHotels[hotelIndex]);
     } else {
-      // Atualizar storedHotels
       const storedHotelIndex = hotelIndex - defaultHotels.length;
       if (storedHotelIndex >= 0 && storedHotelIndex < storedHotels.length) {
-        storedHotels[storedHotelIndex] = updatedHotel;
-        localStorage.setItem('hotels', JSON.stringify(storedHotels));
+        setHotel(storedHotels[storedHotelIndex]);
       }
     }
+  }, [id]);
 
-    setMessage('Hotel atualizado com sucesso!');
-    setTimeout(() => navigate('/'), 2000);
+  useEffect(() => {
+    if (hotel) {
+      setName(hotel.name);
+      setStars(hotel.stars);
+      setCity(hotel.city);
+      setState(hotel.state);
+      setPrice(hotel.price);
+      setImage(hotel.image);
+      setAdditionalImages(hotel.additionalImages || []);
+      setDescription(hotel.description || '');
+      setServices(hotel.services || '');
+    }
+  }, [hotel]);
+
+  const handleUpdate = () => {
+    const updatedHotel = {
+      name,
+      stars,
+      city,
+      state,
+      price,
+      image,
+      additionalImages,
+      description,
+      services,
+    };
+
+    try {
+      const storedHotels = JSON.parse(localStorage.getItem('hotels')) || [];
+      const hotelIndex = parseInt(id, 10);
+
+      if (hotelIndex < defaultHotels.length) {
+        // Atualizar defaultHotels
+        defaultHotels[hotelIndex] = updatedHotel;
+      } else {
+        // Atualizar storedHotels
+        const storedHotelIndex = hotelIndex - defaultHotels.length;
+        if (storedHotelIndex >= 0 && storedHotelIndex < storedHotels.length) {
+          storedHotels[storedHotelIndex] = updatedHotel;
+          localStorage.setItem('hotels', JSON.stringify(storedHotels));
+        }
+      }
+
+      setMessage('Hotel atualizado com sucesso!');
+      setTimeout(() => {
+        setMessage('');
+        navigate('/');
+      }, 2000);
+    } catch {
+      setErrorMessage('Falha ao atualizar o hotel. Por favor, tente novamente.');
+      setTimeout(() => setErrorMessage(''), 3000); // Limpar a mensagem de erro após 3 segundos
+    }
   };
 
   const handleImageChange = (index, value) => {
@@ -81,9 +100,10 @@ function EditHotelForm() {
 
   return (
     <div className="edit-hotel-form">
+      {message && <SuccessMessage message={message} />}
+      {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Exibir mensagem de erro */}
       <h2>Editar Hotel</h2>
-      {message && <p className="success-message">{message}</p>}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => { e.preventDefault(); handleUpdate(); }}>
         <div className="form-group">
           <label htmlFor="name">Nome</label>
           <input
@@ -94,23 +114,12 @@ function EditHotelForm() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="image">URL da Imagem Principal</label>
-          <input
-            type="text"
-            id="image"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="stars">Estrelas</label>
+          <label htmlFor="stars">Classificação</label>
           <input
             type="number"
             id="stars"
             value={stars}
             onChange={(e) => setStars(e.target.value)}
-            min="1"
-            max="5"
           />
         </div>
         <div className="form-group">
@@ -132,13 +141,13 @@ function EditHotelForm() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="price">Preço</label>
+          <label htmlFor="price">Preço Diária</label>
           <input
             type="number"
             id="price"
             value={price}
             onChange={(e) => setPrice(parseFloat(e.target.value))}
-            min="0"
+            min="1"
             step="0.01"
           />
         </div>
@@ -169,7 +178,7 @@ function EditHotelForm() {
             />
           </div>
         ))}
-        <button type="submit" className="submit-button">Atualizar Hotel</button>
+        <button type="submit" className="update-button">Atualizar Hotel</button>
       </form>
     </div>
   );

@@ -1,55 +1,144 @@
 .edit-hotel-form {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-hotel-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.edit-hotel-form .form-group {
+  margin-bottom: 15px;
+}
+
+.edit-hotel-form .form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.edit-hotel-form .form-group input,
+.edit-hotel-form .form-group textarea {
+  width: 95%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-hotel-form .form-group textarea {
+  resize: vertical;
+}
+
+.edit-hotel-form .submit-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-hotel-form .submit-button:hover {
+  background-color: #0056b3;
+}
+
+.edit-hotel-form .success-message {
+  text-align: center;
+  color: green;
+  margin-bottom: 20px;
+}
+
+.update-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.update-button:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff4d4d;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .edit-hotel-form {
+    padding: 15px;
   }
-  
-  .edit-hotel-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
+
+  .edit-hotel-form .form-group input,
+  .edit-hotel-form .form-group textarea {
+    width: 100%;
   }
-  
-  .edit-hotel-form .form-group {
-    margin-bottom: 15px;
+
+  .edit-hotel-form .submit-button {
+    font-size: 14px;
+    padding: 10px;
   }
-  
-  .edit-hotel-form .form-group label {
-    display: block;
-    margin-bottom: 5px;
+
+  .update-button {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
   }
-  
+
+  .error-message {
+    width: 90%;
+    font-size: 16px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .edit-hotel-form {
+    padding: 10px;
+  }
+
   .edit-hotel-form .form-group input,
   .edit-hotel-form .form-group textarea {
     width: 95%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 6px;
   }
-  
-  .edit-hotel-form .form-group textarea {
-    resize: vertical;
-  }
-  
+
   .edit-hotel-form .submit-button {
-    display: block;
-    width: 100%;
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .update-button {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .error-message {
+    width: 95%;
+    font-size: 14px;
     padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
   }
-  
-  .edit-hotel-form .submit-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .edit-hotel-form .success-message {
-    text-align: center;
-    color: green;
-    margin-bottom: 20px;
-  }
+}
