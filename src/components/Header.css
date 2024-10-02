@@ -1,43 +1,48 @@
-/* Estilos para o cabeçalho */
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --button-background-color: #4CAF50;
+  --button-hover-background-color: #45a049;
+}
+
+[data-theme="dark"] {
+  --background-color: #1e1e1e;
+  --text-color: #e0e0e0;
+  --button-background-color: #4CAF50;
+  --button-hover-background-color: #45a049;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 10px 20px;
   background-color: var(--background-color);
   color: var(--text-color);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil */
-}
-
-.logo {
-  font-size: 1.5em;
-  font-weight: bold;
 }
 
 .nav {
   display: flex;
-  gap: 30px; /* Aumenta o espaçamento entre os links de navegação */
+  gap: 30px;
 }
 
 .nav-link {
+  color: var(--text-color);
   text-decoration: none;
-  color: var(--link-color);
-  font-weight: 500; /* Adiciona um peso de fonte para melhor legibilidade */
-  transition: color 0.3s;
 }
 
 .nav-link:hover {
-  color: var(--link-hover-color);
+  text-decoration: underline;
 }
 
 .theme-toggle {
-  background-color: var(--button-background-color);
-  color: var(--button-text-color);
-  border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  background-color: var(--button-background-color);
+  color: var(--text-color);
+  border: none;
 }
 
 .theme-toggle:hover {
@@ -60,18 +65,9 @@
   .nav {
     flex-direction: column; /* Alinha os links verticalmente em telas menores */
     gap: 10px; /* Ajusta o espaçamento para telas menores */
-    width: 100%; /* Ocupa toda a largura disponível */
-  }
-
-  .nav-link {
-    width: 100%; /* Ocupa toda a largura disponível */
-    text-align: left; /* Alinha o texto à esquerda */
-    padding: 10px 0; /* Adiciona espaçamento vertical */
   }
 
   .theme-toggle {
-    width: 100%; /* Ocupa toda a largura disponível */
-    text-align: center; /* Centraliza o texto */
-    margin-top: 10px; /* Adiciona margem superior */
+    margin-top: 10px; /* Adiciona espaçamento entre a navegação e o botão de alternância de tema */
   }
 }

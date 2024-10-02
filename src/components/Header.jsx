@@ -26,8 +26,8 @@ function Header() {
         <Link to="/add-hotel" className="nav-link">Adicionar Hotel</Link>
         <Link to="/favorites" className="nav-link">Favoritos</Link>
       </nav>
-      <button onClick={toggleTheme} className="theme-toggle">
-        {theme === 'light' ? 'Mudar para Tema Escuro' : 'Mudar para Tema Claro'}
+      <button className="theme-toggle" onClick={toggleTheme}>
+        {theme === 'light' ? 'Modo Escuro' : 'Modo Claro'}
       </button>
     </header>
   );
